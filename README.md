@@ -5,4 +5,4 @@ This is a Yahtzee game created with Java. It is an updates version of my old Jav
 -Multiplayer and singleplayer version
 -Better UI
 -Cleaner code
--Instructions and credits page
+-Instructions and credits page 
