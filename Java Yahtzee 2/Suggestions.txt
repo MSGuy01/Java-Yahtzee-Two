@@ -1,0 +1,9 @@
+***SUGGESTIONS***
+-If username ends in s, remove second s after apostrophe
+-Make computer go for large straight if already has small straight
+-Make computer go for three/four of a kind over an upper score
+-Finish instructions/credits
+-Make frame remove then add everything instead of creating a whole new frame
+-Make score previews for the dropdown box
+-Make possible scores list for dice roll menu
+-ERROR: Computer goes for chance even when it has four of a kind
