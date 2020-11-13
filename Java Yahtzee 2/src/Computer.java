@@ -10,27 +10,20 @@ public class Computer{
     }
 }
 class ComputerFrame extends JFrame {
-    //objects:
     Random random = new Random();
     Checker checker = new Checker();
 
-    //integers:
     int[] randomRolls = {0, 0, 0, 0, 0};
     int rollNum = 0;
 
-    //booleans:
     boolean[] randomRollsBoolean = {true, true, true, true, true};
 
-    //action listeners:
     ButtonListener b = new ButtonListener();
 
-    //images:
     ImageIcon icon = new ImageIcon("icon.png");
 
-    //menu jpanels:
     JPanel titlePanel = new JPanel();
 
-    //game jpanels [IN ORDER AS APPEARS ONSCREEN]:
     //Roll number label:
     JPanel rollNumPanel = new JPanel();
     //Die labels:
@@ -44,10 +37,8 @@ class ComputerFrame extends JFrame {
     //Roll/don't roll dice buttons:
     JPanel diceSelectPanel = new JPanel();
 
-    //menu jlabels:
     JLabel title = new JLabel("JAVA YAHTZEE 2!!");
 
-    //game jlabels:
     JLabel rollLabel = new JLabel("DIE1  DIE2  DIE3  DIE4  DIE5");
     JLabel diceLabel1 = new JLabel("");
     JLabel diceLabel2 = new JLabel("");
@@ -59,19 +50,15 @@ class ComputerFrame extends JFrame {
     JLabel[] diceLabels = {diceLabel1, diceLabel2, diceLabel3, diceLabel4, diceLabel5};
     JLabel[] diceLabelsRandom = {diceLabel1, diceLabel2, diceLabel3, diceLabel4, diceLabel5};
 
-    //game jbuttons:
     JButton rollDice = new JButton("Roll Dice");
     JButton next = new JButton("Next");
     JButton nextTurn = new JButton("Next");
 
 
-    //combo boxes:
     JComboBox<String> scoresCombo = new JComboBox<>();
 
-    //Tables:
     JTable scorecardTable;
 
-    //fonts:
     Font titleFont = new Font("Courier", Font.BOLD, 50);
     Font authFont = new Font("Courier", Font.BOLD, 30);
     Font statusFont = new Font("Courier", Font.PLAIN, 20);
@@ -87,12 +74,6 @@ class ComputerFrame extends JFrame {
         for (int i = 0; i < playerScorecard.length; i++) {
             thisPlayerScorecard[i] = playerScorecard[i];
         }
-        /*for (int i = 0; i < playerScorecard.length; i++) {
-            System.out.println("[on computer script] Player scorecard item " + i + ": " + playerScorecard[i]);
-        }
-        for (int i = 0; i < computerScorecard.length; i++) {
-            System.out.println("[on computer script] Computer scorecard item " + i + ": " + computerScorecard[i]);
-        }*/
         setLayout(new FlowLayout(FlowLayout.CENTER, 1000, 50));
         setSize(1000, 1000);
         setTitle("Java Yahtzee 2 by MSGuy01");
@@ -186,11 +167,6 @@ class ComputerFrame extends JFrame {
     }
 
     boolean[] selector() {
-
-        /*
-        DEFINE VARIABLES AND ARRAYS
-         */
-
         int highestLower;
         int originHigh;
         int highestUpper;
@@ -261,11 +237,9 @@ class ComputerFrame extends JFrame {
                 }
                 rollPanel.remove(rollDice);
                 rollNumPanel.add(next);
-                System.out.println("***************************SCORE TYPE 1");
                 System.out.println("Score " + originHigh);
                 highestScore = originHigh;
                 scoreLabel.setText("Score: " + findLowerScore(highestScore));
-                //work on this
                 thisComputerScorecard[findArrayIndex(highestScore) - 1] = checker.check(findArrayIndex(highestScore), randomRolls);
             }
             //If there's a good possible upper section score:
@@ -287,13 +261,10 @@ class ComputerFrame extends JFrame {
                 System.out.println("Score " + highestUpper);
                 highestScore = highestUpper;
                 scoreLabel.setText("Score: " + highestUpper);
-                //MAKE SURE THIS WASN'T ALREADY SCORED
-
             }
             //If there's a good possible lower section score:
             else if (highestLower >= 25 && thisComputerScorecard[findArrayIndex(highestLower) - 1] == 100) {
                 scoreLabel.setText("Score: " + findLowerScore(highestLower) + " (possible)");
-                System.out.println("***************************SCORE TYPE 2");
                 for (int i = 0; i < best.length; i++) {
                     System.out.print("Possible die " + (i + 1) + ": " + best[i] + ", ");
                 }
@@ -310,7 +281,6 @@ class ComputerFrame extends JFrame {
             }
             //four/three of a kind
             else if (thisComputerScorecard[6] == 100 || thisComputerScorecard[7] == 100) {
-                System.out.println("***************************SCORE TYPE 4");
                 for (int i = 0; i < randomRolls.length; i++) {
                     if (randomRolls[i] == checker.most(randomRolls)) {
                         diceLabels[i].setForeground(Color.black);
@@ -324,7 +294,6 @@ class ComputerFrame extends JFrame {
             }
             //Bad roll- PICK RANDOM UPPER SECTION SCORE TO ROLL
             else {
-                System.out.println("***************************SCORE TYPE 5");
                 for (int i = 0; i < randomRolls.length; i++) {
                     diceLabels[i].setForeground(Color.red);
                 }
@@ -353,7 +322,6 @@ class ComputerFrame extends JFrame {
             //NOT GOOD UPPER SECTION SCORE
             else if (checker.check(checker.most(randomRolls), randomRolls) > checker.most(randomRolls) && thisComputerScorecard[checker.most(randomRolls) - 1] == 100){
                 scoreLabel.setText("Score: " + checker.most(randomRolls));
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + checker.most(randomRolls));
                 thisComputerScorecard[checker.most(randomRolls) - 1] = checker.check(checker.most(randomRolls), randomRolls);
             }
             //FOUR OF A KIND
@@ -391,9 +359,6 @@ class ComputerFrame extends JFrame {
                                 break;
                             }
                         }
-                        if (! foundItem) {
-                            System.out.println("WTF HAPPENED");
-                        }
                     }
                 }
             }
@@ -419,19 +384,15 @@ class ComputerFrame extends JFrame {
     }
     int checkMainItem(int[] array) {
         if (checker.check(12, array) != 0 && thisComputerScorecard[11] == 100) {
-            //System.out.println("yahtzee");
             return 50;
         }
         if (checker.check(11, array) != 0 && thisComputerScorecard[10] == 100) {
-            //System.out.println("large straight");
             return 40;
         }
         if (checker.check(10, array) != 0 && thisComputerScorecard[9] == 100) {
-            //System.out.println("small straight");
             return 30;
         }
         if (checker.check(9, array) != 0 && thisComputerScorecard[8] == 100) {
-            //System.out.println("full house");
             return 25;
         }
         return 0;
@@ -533,9 +494,6 @@ class ComputerFrame extends JFrame {
                                 randomRolls[i] = currentRandom;
                             }
                         }
-                                /*for (int i = 0; i < randomRollsBoolean.length; i++) {
-                                    randomRollsBoolean[i] = selector()[i];
-                                }*/
                         randomRollsBoolean = selector();
                     }
                     break;
